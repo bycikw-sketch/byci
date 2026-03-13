@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 209 61% 16%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 209 61% 16%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 209 61% 16%;
+
+    --primary: 209 61% 16%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 216 28% 96%;
+    --secondary-foreground: 209 61% 16%;
+
+    --muted: 216 28% 96%;
+    --muted-foreground: 209 20% 45%;
+
+    --accent: 31 100% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 216 20% 88%;
+    --input: 216 20% 88%;
+    --ring: 31 100% 48%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 209 61% 16%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 31 100% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 209 50% 22%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 209 40% 25%;
+    --sidebar-ring: 31 100% 48%;
+
+    --navy: 209 61% 16%;
+    --navy-light: 209 40% 25%;
+    --orange: 31 100% 48%;
+    --orange-light: 31 100% 55%;
+    --section-bg: 216 28% 96%;
+
+    --font-en: 'Inter', sans-serif;
+    --font-ar: 'Cairo', sans-serif;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-en);
+  }
+
+  [dir="rtl"] body,
+  [dir="rtl"] {
+    font-family: var(--font-ar);
+  }
+
+  [dir="rtl"] .font-en {
+    font-family: var(--font-en);
+  }
+}
