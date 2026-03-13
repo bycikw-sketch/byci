@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -19,6 +20,11 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={t.contact.title}
+        description={t.contact.subtitle}
+        canonicalUrl="https://byci.com/contact"
+      />
       <section className="bg-primary py-16">
         <div className="container text-center">
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground mb-2">{t.contact.title}</h1>

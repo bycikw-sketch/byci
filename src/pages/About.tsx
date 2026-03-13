@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { Target, Eye, Compass, MapPin } from 'lucide-react';
 
@@ -14,6 +15,11 @@ const About = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={t.about.title}
+        description={t.about.subtitle}
+        canonicalUrl="https://byci.com/about"
+      />
       <section className="bg-primary py-16">
         <div className="container text-center">
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground mb-2">{t.about.title}</h1>

@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { programs, getCategoryLabel, getLevelLabel } from '@/data/programs';
 import { Button } from '@/components/ui/button';
@@ -34,6 +35,12 @@ const ProgramDetail = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={title}
+        description={overview.substring(0, 150) + '...'}
+        canonicalUrl={`https://byci.com/programs/${id}`}
+        type="course"
+      />
       {/* Hero */}
       <section className="bg-primary py-16">
         <div className="container">

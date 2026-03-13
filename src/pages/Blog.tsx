@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { blogArticles, getBlogCategoryLabel } from '@/data/blog';
 import { Input } from '@/components/ui/input';
@@ -26,6 +27,11 @@ const Blog = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={t.blog.title}
+        description={t.blog.subtitle}
+        canonicalUrl="https://byci.com/blog"
+      />
       <section className="bg-primary py-16">
         <div className="container text-center">
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground mb-2">{t.blog.title}</h1>

@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { blogArticles, getBlogCategoryLabel } from '@/data/blog';
 import { Button } from '@/components/ui/button';
@@ -29,6 +30,12 @@ const BlogDetail = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={title}
+        description={content[0].substring(0, 150) + '...'}
+        canonicalUrl={`https://byci.com/blog/${id}`}
+        type="article"
+      />
       {/* Hero */}
       <section className="bg-primary py-16">
         <div className="container max-w-3xl">

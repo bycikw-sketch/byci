@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -18,6 +19,11 @@ const Certifications = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={t.certifications.title}
+        description={t.certifications.subtitle}
+        canonicalUrl="https://byci.com/certifications"
+      />
       <section className="bg-primary py-16">
         <div className="container text-center">
           <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground mb-2">{t.certifications.title}</h1>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import ProgramCard from '@/components/ProgramCard';
 import { programs, getCategoryLabel, getLevelLabel } from '@/data/programs';
@@ -26,6 +27,11 @@ const Programs = () => {
 
   return (
     <Layout>
+      <SEO 
+        title={t.programs.title}
+        description={t.programs.subtitle}
+        canonicalUrl="https://byci.com/programs"
+      />
       <section className="py-16 bg-section-bg">
         <div className="container">
           <div className="text-center mb-10">

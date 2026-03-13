@@ -1,4 +1,5 @@
 import { useLanguage } from '@/contexts/LanguageContext';
+import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import HeroCarousel from '@/components/HeroCarousel';
 import ProgramCard from '@/components/ProgramCard';
@@ -16,6 +17,11 @@ const Index = () => {
 
   return (
     <Layout>
+      <SEO 
+        title="Home"
+        description="BYCI provides professional development programs, globally recognized certifications, and corporate training solutions across Kuwait, the GCC, and India."
+        canonicalUrl="https://byci.com"
+      />
       {/* Hero */}
       <HeroCarousel />
 
