@@ -7,7 +7,7 @@ const SplashScreen = () => {
   return (
     <div className="fixed inset-0 z-[100] bg-background flex items-center justify-center">
       <div className="text-center px-6 max-w-lg">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-primary mb-2">BYCI</h1>
+        <img src="/logo.png" alt="BYCI Logo" className="h-32 md:h-48 w-auto object-contain mx-auto mb-6" />
         <p className="text-xl md:text-2xl font-bold text-foreground mb-2 font-en">
           Build Your Career Institute
         </p>
