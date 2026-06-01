@@ -13,11 +13,21 @@ import Contact from "./pages/Contact";
 import Corporate from "./pages/Corporate";
 import Certifications from "./pages/Certifications";
 import Enrollment from "./pages/Enrollment";
+import FreeAIWebinar from "./pages/FreeAIWebinar";
+import SeoLandingPage from "./pages/SeoLandingPage";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 const AppContent = () => {
   const { showSplash } = useLanguage();
@@ -37,6 +47,8 @@ const AppContent = () => {
         <Route path="/corporate" element={<Corporate />} />
         <Route path="/certifications" element={<Certifications />} />
         <Route path="/enrollment" element={<Enrollment />} />
+        <Route path="/free-ai-webinar" element={<FreeAIWebinar />} />
+        <Route path="/training/:slug" element={<SeoLandingPage />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="*" element={<NotFound />} />

@@ -3,12 +3,15 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
 import ProgramCard from '@/components/ProgramCard';
-import { programs, getCategoryLabel, getLevelLabel } from '@/data/programs';
+import { ProgramCardSkeleton } from '@/components/SkeletonCard';
+import { getCategoryLabel, getLevelLabel } from '@/data/programs';
+import { usePrograms } from '@/lib/sanity/hooks';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
 const Programs = () => {
   const { t, lang } = useLanguage();
+  const { data: programs = [], isLoading } = usePrograms();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
   const [level, setLevel] = useState('all');
@@ -27,18 +30,20 @@ const Programs = () => {
 
   return (
     <Layout>
-      <SEO 
+      <SEO
         title={t.programs.title}
         description={t.programs.subtitle}
-        canonicalUrl="https://byci.com/programs"
+        canonicalUrl="https://byciedu.com/programs"
       />
+      <section className="page-hero py-20">
+        <div className="container text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3">{t.programs.title}</h1>
+          <p className="text-white/75 text-lg max-w-xl mx-auto">{t.programs.subtitle}</p>
+        </div>
+      </section>
+
       <section className="py-16 bg-section-bg">
         <div className="container">
-          <div className="text-center mb-10">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-foreground mb-2">{t.programs.title}</h1>
-            <p className="text-muted-foreground">{t.programs.subtitle}</p>
-          </div>
-
           {/* Filters */}
           <div className="flex flex-col md:flex-row gap-4 mb-8">
             <div className="relative flex-1">
@@ -72,7 +77,11 @@ const Programs = () => {
             </select>
           </div>
 
-          {filtered.length > 0 ? (
+          {isLoading ? (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => <ProgramCardSkeleton key={i} />)}
+            </div>
+          ) : filtered.length > 0 ? (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((p) => <ProgramCard key={p.id} program={p} />)}
             </div>

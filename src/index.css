@@ -20,7 +20,7 @@
     --secondary-foreground: 209 61% 16%;
 
     --muted: 216 28% 96%;
-    --muted-foreground: 209 20% 45%;
+    --muted-foreground: 209 18% 46%;
 
     --accent: 31 100% 48%;
     --accent-foreground: 0 0% 100%;
@@ -28,11 +28,11 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 216 20% 88%;
-    --input: 216 20% 88%;
+    --border: 216 22% 89%;
+    --input: 216 22% 89%;
     --ring: 31 100% 48%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 209 61% 16%;
     --sidebar-foreground: 0 0% 95%;
@@ -57,9 +57,18 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-en);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+    line-height: 1.2;
   }
 
   [dir="rtl"] body,
@@ -67,7 +76,27 @@
     font-family: var(--font-ar);
   }
 
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4 {
+    letter-spacing: 0;
+  }
+
   [dir="rtl"] .font-en {
     font-family: var(--font-en);
+  }
+}
+
+@layer utilities {
+  .page-hero {
+    @apply relative overflow-hidden;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--navy-light)) 100%);
+  }
+  .page-hero::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background-image: radial-gradient(circle at 80% 50%, hsl(var(--accent) / 0.08) 0%, transparent 60%),
+                      radial-gradient(circle at 20% 80%, hsl(var(--primary-foreground) / 0.04) 0%, transparent 50%);
   }
 }

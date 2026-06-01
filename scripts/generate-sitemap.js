@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 // This script generates a sitemap.xml file based on the static routes + dynamic blog/program IDs
 // It's designed to be run as a postbuild script.
 
-const BASE_URL = 'https://byci.com';
+const BASE_URL = 'https://byciedu.com';
 
 // Mocking getting the data directly since we can't easily import TS files with ESM in a simple node script
 // We'll read the IDs from the TS files broadly. 
@@ -26,7 +26,14 @@ const generateSitemap = async () => {
     '/blog',
     '/about',
     '/contact',
-    '/enrollment'
+    '/enrollment',
+    '/free-ai-webinar',
+    '/training/ai-course-kuwait',
+    '/training/pmp-training-kuwait',
+    '/training/corporate-training-kuwait',
+    '/training/data-science-course-kuwait',
+    '/training/cybersecurity-course-kuwait',
+    '/training/cloud-computing-course-kuwait'
   ];
 
   // We could parse the TS files for IDs, but for the sake of speed, 

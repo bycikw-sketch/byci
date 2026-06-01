@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
-import { blogArticles, getBlogCategoryLabel } from '@/data/blog';
+import { getBlogCategoryLabel } from '@/data/blog';
+import { BlogCardSkeleton } from '@/components/SkeletonCard';
+import { useBlogPosts } from '@/lib/sanity/hooks';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, Calendar, Clock, Brain, Award, Users, Cloud, BarChart3, Shield } from 'lucide-react';
@@ -12,6 +14,7 @@ const iconMap: Record<string, React.ElementType> = { Brain, Award, Users, Cloud,
 
 const Blog = () => {
   const { t, lang } = useLanguage();
+  const { data: blogArticles = [], isLoading } = useBlogPosts();
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
 
@@ -27,15 +30,15 @@ const Blog = () => {
 
   return (
     <Layout>
-      <SEO 
+      <SEO
         title={t.blog.title}
         description={t.blog.subtitle}
-        canonicalUrl="https://byci.com/blog"
+        canonicalUrl="https://byciedu.com/blog"
       />
-      <section className="bg-primary py-16">
-        <div className="container text-center">
-          <h1 className="text-3xl md:text-4xl font-extrabold text-primary-foreground mb-2">{t.blog.title}</h1>
-          <p className="text-primary-foreground/80">{t.blog.subtitle}</p>
+      <section className="page-hero py-20">
+        <div className="container text-center relative z-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3">{t.blog.title}</h1>
+          <p className="text-white/75 text-lg max-w-xl mx-auto">{t.blog.subtitle}</p>
         </div>
       </section>
 
@@ -64,7 +67,11 @@ const Blog = () => {
             </select>
           </div>
 
-          {filtered.length > 0 ? (
+          {isLoading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => <BlogCardSkeleton key={i} />)}
+            </div>
+          ) : filtered.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filtered.map((article) => {
                 const Icon = iconMap[article.icon] || Brain;
@@ -74,25 +81,21 @@ const Blog = () => {
 
                 return (
                   <article key={article.id} className="group bg-card rounded-lg border border-border overflow-hidden hover:shadow-md transition-shadow">
-                    {/* Colored header */}
                     <div className="h-40 bg-primary/5 flex items-center justify-center relative">
                       <Icon className="h-12 w-12 text-accent/40" />
                       <span className="absolute top-3 left-3 rtl:left-auto rtl:right-3 text-xs font-medium bg-accent/10 text-accent px-2 py-1 rounded">
                         {getBlogCategoryLabel(article.category, lang)}
                       </span>
                     </div>
-
                     <div className="p-6">
                       <div className="flex items-center gap-3 text-xs text-muted-foreground mb-3">
                         <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{new Date(article.date).toLocaleDateString(lang === 'ar' ? 'ar-KW' : 'en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
                         <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{readTime}</span>
                       </div>
-
                       <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2 group-hover:text-accent transition-colors">
                         <Link to={`/blog/${article.id}`}>{title}</Link>
                       </h3>
                       <p className="text-sm text-muted-foreground mb-4 line-clamp-3">{excerpt}</p>
-
                       <div className="flex items-center justify-between">
                         <span className="text-xs text-muted-foreground">{article.author}</span>
                         <Button variant="accent" size="sm" asChild>

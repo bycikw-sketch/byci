@@ -23,7 +23,7 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
@@ -31,30 +31,33 @@ const Header = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1" role="navigation" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center" role="navigation" aria-label="Main navigation">
           {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+              className={`relative px-3.5 py-2 text-sm font-medium transition-colors ${
                 isActive(item.path)
-                  ? 'text-accent bg-accent/10'
-                  : 'text-foreground/70 hover:text-foreground hover:bg-muted'
+                  ? 'text-accent'
+                  : 'text-foreground/65 hover:text-foreground'
               }`}
             >
               {item.label}
+              {isActive(item.path) && (
+                <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-accent rounded-full" />
+              )}
             </Link>
           ))}
         </nav>
 
         {/* Right Side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {/* Language Toggle */}
-          <div className="flex items-center border border-border rounded-md overflow-hidden">
+          <div className="flex items-center bg-muted rounded-full p-0.5">
             <button
               onClick={() => setLang('en')}
-              className={`px-3 py-1.5 text-xs font-semibold transition-colors ${
-                lang === 'en' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'
+              className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
+                lang === 'en' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
               }`}
               aria-label="Switch to English"
             >
@@ -62,8 +65,8 @@ const Header = () => {
             </button>
             <button
               onClick={() => setLang('ar')}
-              className={`px-3 py-1.5 text-xs font-semibold transition-colors ${
-                lang === 'ar' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted'
+              className={`px-3 py-1 text-xs font-semibold rounded-full transition-all ${
+                lang === 'ar' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'
               }`}
               aria-label="التبديل إلى العربية"
             >
@@ -71,7 +74,7 @@ const Header = () => {
             </button>
           </div>
 
-          <Button variant="accent" size="sm" className="hidden sm:inline-flex" asChild>
+          <Button variant="accent" size="sm" className="hidden sm:inline-flex shadow-sm" asChild>
             <Link to="/enrollment">{t.nav.login}</Link>
           </Button>
 

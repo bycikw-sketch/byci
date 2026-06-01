@@ -5,21 +5,36 @@ const SplashScreen = () => {
   const { t, dismissSplash } = useLanguage();
 
   return (
-    <div className="fixed inset-0 z-[100] bg-background flex items-center justify-center">
-      <div className="text-center px-6 max-w-lg">
-        <img src="/logo.png" alt="BYCI Logo" className="h-32 md:h-48 w-auto object-contain mx-auto mb-6" />
-        <p className="text-xl md:text-2xl font-bold text-foreground mb-2 font-en">
-          Build Your Career Institute
+    <div className="fixed inset-0 z-[100] bg-white flex items-center justify-center overflow-hidden">
+      <div className="relative text-center px-6 max-w-lg">
+        <img
+          src="/logo.png"
+          alt="BYCI Logo"
+          className="h-32 md:h-48 w-auto object-contain mx-auto mb-8"
+        />
+        <p className="text-xl md:text-2xl font-bold text-primary mb-2">
+          {t.splash.title}
         </p>
-        <p className="text-muted-foreground mb-10">
-          Professional Development for the Modern Workforce
+        <p className="text-muted-foreground mb-10 text-sm md:text-base">
+          {t.splash.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Button variant="accent" size="lg" onClick={() => dismissSplash('en')}>
-            Continue in English
+          <Button
+            variant="accent"
+            size="lg"
+            onClick={() => dismissSplash('en')}
+            className="shadow-xl"
+          >
+            {t.splash.continueEn}
           </Button>
-          <Button variant="outline" size="lg" onClick={() => dismissSplash('ar')} className="font-ar" style={{ fontFamily: "'Cairo', sans-serif" }}>
-            المتابعة باللغة العربية
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => dismissSplash('ar')}
+            className="border-primary/30 text-primary bg-transparent hover:bg-primary/5 hover:text-primary"
+            style={{ fontFamily: "'Cairo', sans-serif" }}
+          >
+            {t.splash.continueAr}
           </Button>
         </div>
       </div>

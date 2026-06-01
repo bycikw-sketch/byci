@@ -25,7 +25,7 @@ const Corporate = () => {
       <SEO 
         title={t.corporate.title}
         description={t.corporate.subtitle}
-        canonicalUrl="https://byci.com/corporate"
+        canonicalUrl="https://byciedu.com/corporate"
       />
       <section className="bg-primary py-16">
         <div className="container text-center">

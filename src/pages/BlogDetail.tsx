@@ -2,14 +2,27 @@ import { useParams, Link } from 'react-router-dom';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { SEO } from '@/components/SEO';
 import Layout from '@/components/Layout';
-import { blogArticles, getBlogCategoryLabel } from '@/data/blog';
+import { getBlogCategoryLabel } from '@/data/blog';
+import { useBlogPost } from '@/lib/sanity/hooks';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import { BlogCardSkeleton } from '@/components/SkeletonCard';
 
 const BlogDetail = () => {
   const { id } = useParams();
   const { t, lang, isRTL } = useLanguage();
-  const article = blogArticles.find((a) => a.id === id);
+  const { data: article, isLoading } = useBlogPost(id);
+  const BackArrow = isRTL ? ArrowRight : ArrowLeft;
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="container py-20 max-w-3xl">
+          <BlogCardSkeleton />
+        </div>
+      </Layout>
+    );
+  }
 
   if (!article) {
     return (
@@ -26,19 +39,18 @@ const BlogDetail = () => {
   const content = lang === 'en' ? article.contentEn : article.contentAr;
   const readTime = lang === 'en' ? article.readTimeEn : article.readTimeAr;
   const authorRole = lang === 'en' ? article.authorRoleEn : article.authorRoleAr;
-  const BackArrow = isRTL ? ArrowRight : ArrowLeft;
 
   return (
     <Layout>
-      <SEO 
+      <SEO
         title={title}
         description={content[0].substring(0, 150) + '...'}
-        canonicalUrl={`https://byci.com/blog/${id}`}
+        canonicalUrl={`https://byciedu.com/blog/${id}`}
         type="article"
       />
       {/* Hero */}
-      <section className="bg-primary py-16">
-        <div className="container max-w-3xl">
+      <section className="page-hero py-16">
+        <div className="container max-w-3xl relative z-10">
           <Link to="/blog" className="inline-flex items-center gap-1 text-primary-foreground/70 hover:text-primary-foreground text-sm mb-6 transition-colors">
             <BackArrow className="h-4 w-4" />{t.blog.backToBlog}
           </Link>

@@ -1,14 +1,17 @@
-import { Phone } from 'lucide-react';
+import { useSiteSettings } from '@/lib/sanity/hooks';
 
 const WhatsAppButton = () => {
+  const { data: settings } = useSiteSettings();
+  const whatsappUrl = settings?.whatsappUrl ?? 'https://wa.me/96541103254';
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex items-center justify-center">
       {/* Outer pulsing ring for attention */}
       <div className="absolute h-full w-full animate-ping rounded-full bg-[#25D366] opacity-30"></div>
-      
+
       {/* Button */}
       <a
-        href="https://wa.me/96541103254"
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
